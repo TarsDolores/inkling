@@ -8,8 +8,8 @@ using System.Windows.Forms;
 [assembly: AssemblyDescription("随记写作应用启动器")]
 [assembly: AssemblyProduct("随记")]
 [assembly: AssemblyCompany("随记")]
-[assembly: AssemblyVersion("2.3.2.0")]
-[assembly: AssemblyFileVersion("2.3.2.0")]
+[assembly: AssemblyVersion("2.4.0.0")]
+[assembly: AssemblyFileVersion("2.4.0.0")]
 
 internal static class SuijiLauncher
 {

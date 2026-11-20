@@ -272,6 +272,10 @@ export function Settings() {
             <div className="setting-copy"><h2>AI 回声</h2></div>
             <div className="setting-control ai-settings-stack">
               <div className="settings-subsection">
+                <label className="switch-row"><span><strong>启用 AI 回声</strong></span><input type="checkbox" checked={store.settings.aiEnabled !== false} onChange={(event) => void store.updateSettings({ aiEnabled: event.target.checked })} /></label>
+              </div>
+              {store.settings.aiEnabled !== false && <>
+              <div className="settings-subsection">
                 <h3>生成偏好</h3>
                 <div className="settings-field-grid">
                   <label className="settings-field"><span>默认范围</span><select value={store.settings.aiDefaultRange} onChange={(event) => void store.updateSettings({ aiDefaultRange: event.target.value as typeof store.settings.aiDefaultRange })}>{AI_RANGES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
@@ -293,6 +297,7 @@ export function Settings() {
                   </div>
                 </div>
               </div>
+              </>}
             </div>
           </section>
 

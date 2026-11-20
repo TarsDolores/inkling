@@ -47,6 +47,8 @@ export interface AppSettings {
   fontUi: string
   fontMono: string
   fontWriting: string
+  /** 关闭后首页回到纯文本记录，不出现任何回声入口 */
+  aiEnabled: boolean
   aiPersona: string
   aiDefaultRange: AiRange
   aiDefaultMode: AiReadingMode

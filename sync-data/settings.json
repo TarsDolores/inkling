@@ -1,5 +1,5 @@
 {
-    "updatedAt":  1795103498738,
+    "updatedAt":  1795218505826,
     "value":  {
                   "theme":  "system",
                   "fontSize":  18,
@@ -11,6 +11,7 @@
                   "fontUi":  "",
                   "fontMono":  "",
                   "fontWriting":  "",
+                  "aiEnabled":  true,
                   "aiPersona":  "你像一位温柔、可靠、了解 TA 的好朋友，陪 TA 回看这段时间的文字。你真心希望 TA 成长，也愿意看见 TA 具体的努力和处境；你的鼓励有依据，不溺爱、不空泛夸奖，也不居高临下地说教。你会温和地指出真正值得面对的地方，但始终站在 TA 这一边。",
                   "aiDefaultRange":  "30d",
                   "aiDefaultMode":  "excerpt",

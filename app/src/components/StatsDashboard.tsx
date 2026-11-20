@@ -19,6 +19,7 @@ export function StatsDashboard({ notes }: { notes: Note[] }) {
   const [sharing, setSharing] = useState(false)
   const showToast = useAppStore(state => state.showToast)
   const showHeatmap = useAppStore(state => state.settings.showHeatmap)
+  const aiEnabled = useAppStore(state => state.settings.aiEnabled)
   const stats = calculateWritingStats(notes)
   const focus = durationParts(stats.totalWritingSeconds)
 
@@ -50,7 +51,7 @@ export function StatsDashboard({ notes }: { notes: Note[] }) {
           {showHeatmap && <WritingPulse />}
           <IconButton className="stats-share-button stats-share-compact" type="button" label={sharing ? '正在生成分享图' : '下载写作分享图'} disabled={sharing} aria-busy={sharing} onClick={() => void share()}>{sharing ? <LoaderCircle size={15} className="stats-share-spinner" /> : <Share size={15} />}</IconButton>
         </div>
-        <AiReviewCard />
+        {aiEnabled && <AiReviewCard />}
       </div>
     </section>
   )

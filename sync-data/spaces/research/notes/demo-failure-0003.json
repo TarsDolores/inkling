@@ -1,0 +1,17 @@
+{
+    "id":  "demo-failure-0003",
+    "title":  "",
+    "content":  "一次失败的尝试\n\n　　这周想验证的假设没成立。跑了三组参数，指标都停在同一个位置，说明问题不在调参上。\n\n　　收获是排除法：至少知道这条路走不通，而且知道为什么。下次写实验记录时把「预期结果」也一起记下来，这样失败的时候能立刻看出是假设错了还是实现错了。",
+    "topicId":  "research",
+    "tags":  [
+
+             ],
+    "createdAt":  1794850000000,
+    "updatedAt":  1794850060000,
+    "accumulatedWritingSeconds":  0,
+    "wordCount":  118,
+    "pinned":  false,
+    "activeDates":  [
+
+                    ]
+}

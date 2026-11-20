@@ -32,6 +32,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   fontUi: '',
   fontMono: '',
   fontWriting: '',
+  aiEnabled: true,
   aiPersona: DEFAULT_AI_PERSONA,
   aiDefaultRange: '30d',
   aiDefaultMode: 'excerpt',

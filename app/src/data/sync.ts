@@ -209,6 +209,7 @@ export function normalizeSettings(value: unknown): AppSettings {
     fontUi: safeFontName(asString(value.fontUi)),
     fontMono: safeFontName(asString(value.fontMono)),
     fontWriting: safeFontName(asString(value.fontWriting)),
+    aiEnabled: value.aiEnabled !== false,
     aiPersona: (() => {
       const persona = asString(value.aiPersona).replace(/\r\n/g, '\n').trim().slice(0, 800)
       return persona || DEFAULT_AI_PERSONA

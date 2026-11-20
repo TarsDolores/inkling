@@ -1,29 +1,44 @@
 # 随记 · Inkling
 
-> 安静、本地优先的 Windows 写作应用。数据是透明的 JSON，AI 只负责轻轻回看。
+> 优雅地记录生活的点点滴滴。
 
-![version](https://img.shields.io/badge/version-2.3.2-c96442?style=flat-square)
+![version](https://img.shields.io/badge/version-2.4.0-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
 
+## 它想做的事
+
+把每天想留下的那一点写下来，不被打扰。文字是你的：一篇文章一个 JSON 文件，躺在自己的硬盘上，不需要账号，也不会上传到任何地方。
+
+AI 回声是一个可选的旁观者。它不点评、不说教，只是隔一段时间把你写下的东西轻轻放回你面前——一句核心，两三句话解释，一个值得想想的问题，一句原文引用。像有人坐在旁边，安静地看过，然后说了一句。
+
+不喜欢被看着？**关掉它**。随记会变回一张干净的纸：标题、统计、你的文章，仅此而已。
 
 ![首页](docs/screenshots/home-light.webp)
 
-## 写下来，然后被轻轻读到
+## 两种样子
 
-- **生活 / 科研**：两个完全独立的空间，侧栏滑块切换，数量与名称可自定义
-- **AI 回声**：同时读取两个空间，写成一页十几秒的回顾；支持任意 OpenAI 兼容 API
-- **透明存储**：一篇文章一个 JSON 文件，目录即数据，无账号无云端
-- **安静**：本地服务只绑定 `127.0.0.1`，每日自动备份，不自动调用 AI
+有回声时，首页是一页写作回顾，往下滑是文章列表：
 
-> AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
+| 深色 | 关闭 AI 后 |
+|---|---|
+| ![深色](docs/screenshots/home-dark.webp) | ![纯文本](docs/screenshots/home-plain.webp) |
 
-![深色](docs/screenshots/home-dark.webp)
+关闭后没有任何 AI 入口，设置页里也不会再出现相关选项——就是一份安静的本地记录。
 
-| | | |
+| 编辑器 | 科研空间 | 设置 |
 |---|---|---|
 | ![编辑器](docs/screenshots/editor.webp) | ![科研空间](docs/screenshots/research.webp) | ![设置](docs/screenshots/settings.webp) |
+
+## 别的
+
+- **生活 / 科研**：两个独立空间，各有自己的文章、主题、统计与回收站；数量与名称可自定义（1-3 个）
+- **AI 可换**：支持任意 OpenAI 兼容 API（DeepSeek、OpenRouter、Kimi、本地 Ollama、OpenCode Go）
+- **数据透明**：目录即数据，随便打开、复制、带走
+- **本地服务**：只绑定 `127.0.0.1`，每日自动备份，不会自动调用 AI
+
+> AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
 
 ## 运行
 
@@ -35,22 +50,17 @@ cd ..
 powershell -File app\scripts\serve-suiji.ps1 -Root app\dist -DataRoot sync-data -Port 4180
 ```
 
-打开 `http://127.0.0.1:4180`，首屏向下滚动进入文章列表，侧栏滑块切换空间。
-
-## AI 回声
-
-**设置 → AI**：选择提供商预设（DeepSeek 官方、OpenRouter、Kimi、本地 Ollama、OpenCode Go，或任意 OpenAI 兼容 API），粘贴 Key。只在点击生成时调用，Key 只存本机。
+打开 `http://127.0.0.1:4180`。首屏向下滚动进入文章列表，侧栏滑块切换空间。
 
 ## 开发
 
 ```bash
 cd app
-npm install
 npm run dev      # 界面热更新
 npm run test     # 29 项测试
 ```
 
-技术栈：React 19 · TypeScript · Vite · Zustand · Dexie · framer-motion · PowerShell。
+React 19 · TypeScript · Vite · Zustand · Dexie · framer-motion · PowerShell。
 
 ## 许可证
 

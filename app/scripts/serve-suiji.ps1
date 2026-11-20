@@ -40,7 +40,7 @@ foreach ($directory in $directories) {
 $utf8 = [Text.UTF8Encoding]::new($false)
 $defaultAiPersona = '你像一位温柔、可靠、了解 TA 的好朋友，陪 TA 回看这段时间的文字。你真心希望 TA 成长，也愿意看见 TA 具体的努力和处境；你的鼓励有依据，不溺爱、不空泛夸奖，也不居高临下地说教。你会温和地指出真正值得面对的地方，但始终站在 TA 这一边。'
 $defaultSpaces = @([PSCustomObject]@{ id = 'life'; name = '生活' }, [PSCustomObject]@{ id = 'research'; name = '科研' })
-$defaultSettings = [ordered]@{ theme = 'system'; fontSize = 18; interfaceFontSize = 13; lineHeight = 1.9; motion = 'full'; typewriterMode = $false; fontDisplay = ''; fontUi = ''; fontMono = ''; fontWriting = ''; aiPersona = $defaultAiPersona; aiDefaultRange = '30d'; aiDefaultMode = 'excerpt'; echoSize = 'standard'; showEchoKeywords = $true; showHeatmap = $true; spaces = $defaultSpaces }
+$defaultSettings = [ordered]@{ theme = 'system'; fontSize = 18; interfaceFontSize = 13; lineHeight = 1.9; motion = 'full'; typewriterMode = $false; fontDisplay = ''; fontUi = ''; fontMono = ''; fontWriting = ''; aiEnabled = $true; aiPersona = $defaultAiPersona; aiDefaultRange = '30d'; aiDefaultMode = 'excerpt'; echoSize = 'standard'; showEchoKeywords = $true; showHeatmap = $true; spaces = $defaultSpaces }
 $backupRetentionDays = 45
 $sourceHash = ''
 $fingerprintPath = Join-Path $rootPath 'build-fingerprint.json'
@@ -290,7 +290,7 @@ function ConvertTo-SafeTopic($Topic, [double]$FallbackTime = 0) {
 }
 
 function ConvertTo-SafeSettings($Value) {
-    $settings = [ordered]@{ theme = 'system'; fontSize = 18; interfaceFontSize = 13; lineHeight = 1.9; motion = 'full'; typewriterMode = $false; fontDisplay = ''; fontUi = ''; fontMono = ''; fontWriting = ''; aiPersona = $defaultAiPersona; aiDefaultRange = '30d'; aiDefaultMode = 'excerpt'; echoSize = 'standard'; showEchoKeywords = $true; showHeatmap = $true; spaces = $defaultSpaces }
+    $settings = [ordered]@{ theme = 'system'; fontSize = 18; interfaceFontSize = 13; lineHeight = 1.9; motion = 'full'; typewriterMode = $false; fontDisplay = ''; fontUi = ''; fontMono = ''; fontWriting = ''; aiEnabled = $true; aiPersona = $defaultAiPersona; aiDefaultRange = '30d'; aiDefaultMode = 'excerpt'; echoSize = 'standard'; showEchoKeywords = $true; showHeatmap = $true; spaces = $defaultSpaces }
     if ($null -eq $Value) { return $settings }
 
     $theme = Get-SafeString $Value.theme
@@ -307,6 +307,7 @@ function ConvertTo-SafeSettings($Value) {
     foreach ($field in @('fontDisplay', 'fontUi', 'fontMono', 'fontWriting')) {
         $settings[$field] = Get-SafeFontName $Value.$field
     }
+    $settings['aiEnabled'] = $Value.aiEnabled -ne $false
     $settings['aiPersona'] = Get-SafePersona $Value.aiPersona
     $range = Get-SafeString $Value.aiDefaultRange
     if (@('7d', '30d', '90d', 'year', 'all') -contains $range) { $settings['aiDefaultRange'] = $range }

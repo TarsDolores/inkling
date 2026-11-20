@@ -3118,3 +3118,40 @@ html[data-motion="off"] .space-switch button { transition: none; }
   width: fit-content;
 }
 .space-add:hover { color: var(--accent); background: var(--accent-soft); }
+
+/* 关闭 AI 回声后的单页版面：统计与文章在同一条自然滚动里 */
+.home-page.plain-home .home-page-section {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+.home-page.plain-home .home-plain-section { padding-bottom: 64px; }
+.home-page.plain-home .stats-dashboard {
+  flex: 0 0 auto;
+  margin: 0 0 30px;
+}
+.home-page.plain-home .stats-panel { flex: 0 0 auto; }
+.home-page.plain-home .recap-footer-row { margin-bottom: 0; }
+.plain-notes { margin-top: 4px; }
+.plain-notes .notes-page-heading { margin-bottom: 16px; }
+.plain-notes .note-list { padding-bottom: 8px; }
+
+/* 回声卡片：间距随视口伸缩但有上限，引句贴底 */
+.ai-review-body-compact { justify-content: flex-start; }
+.ai-review-body-compact .ai-essence p { margin-bottom: 0; }
+.ai-review-body-compact .ai-short-overview { margin-top: clamp(14px, 3.2vh, 34px); }
+.ai-review-body-compact .ai-compact-grid { margin-top: clamp(20px, 5vh, 58px); }
+.ai-review-body-compact .ai-quote-compact { margin-top: auto; padding-top: 0; }
+/* 回声卡片按内容高度排列，底部留白交给版面而不是卡片内部 */
+.ai-review-panel { flex: 0 0 auto; }
+.ai-review-body-compact { flex: 0 0 auto; display: block; }
+.ai-review-body-compact .ai-quote-compact { margin-top: clamp(18px, 4vh, 46px); padding-top: 0; }
+.home-dashboard-section .page-down-hint { margin-top: auto; }
+/* 首屏按内容高度收尾，让下一屏露出一角作为提示 */
+.home-page:not(.plain-home) .home-dashboard-section {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
