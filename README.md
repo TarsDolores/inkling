@@ -5,7 +5,7 @@
 ![version](https://img.shields.io/badge/version-2.2.0-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
-![ai coded](https://img.shields.io/badge/AI--coded-GLM-c96442?style=flat-square)
+![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
 
 
 ![首页](docs/screenshots/home-light.png)
@@ -17,7 +17,7 @@
 - **透明存储**：一篇文章一个 JSON 文件，目录即数据，无账号无云端
 - **安静**：本地服务只绑定 `127.0.0.1`，每日自动备份，不自动调用 AI
 
-> AI coding 作品：想法与审美来自人，代码与文档由 AI（GLM）写成。
+> AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
 
 ![深色](docs/screenshots/home-dark.png)
 
