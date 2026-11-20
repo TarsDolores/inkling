@@ -1,8 +1,8 @@
-# 随记 · Inkling
+﻿# 随记 · Inkling
 
 > 优雅地记录生活的点点滴滴。
 
-![version](https://img.shields.io/badge/version-1.0.0-c96442?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.0.0-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
