@@ -2,7 +2,7 @@
 
 > 优雅地记录生活的点点滴滴。
 
-![version](https://img.shields.io/badge/version-2.4.0-c96442?style=flat-square)
+![version](https://img.shields.io/badge/version-1.0.0-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
@@ -14,6 +14,12 @@
 AI 回声是一个可选的旁观者。它不点评、不说教，只是隔一段时间把你写下的东西轻轻放回你面前——一句核心，两三句话解释，一个值得想想的问题，一句原文引用。像有人坐在旁边，安静地看过，然后说了一句。
 
 不喜欢被看着？**关掉它**。随记会变回一张干净的纸：标题、统计、你的文章，仅此而已。
+
+## 为什么做它
+
+想法总在不对的时候来：地铁上、睡前、刚洗完澡。它们没有地方可去——笔记软件太重，备忘录太单薄，而把自己的文字交给别人的服务器，总有点不安。
+
+随记就是想给这些念头一个安静的落脚处。它用 vibe coding 的方式做出来：边想边写，边写边改，把工程交给 AI，自己只负责判断什么值得留下。
 
 ![首页](docs/screenshots/home-light.webp)
 
@@ -38,8 +44,6 @@ AI 回声是一个可选的旁观者。它不点评、不说教，只是隔一�
 - **数据透明**：目录即数据，随便打开、复制、带走
 - **本地服务**：只绑定 `127.0.0.1`，每日自动备份，不会自动调用 AI
 
-> AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
-
 ## 运行
 
 ```powershell
@@ -61,6 +65,12 @@ npm run test     # 29 项测试
 ```
 
 React 19 · TypeScript · Vite · Zustand · Dexie · framer-motion · PowerShell。
+
+## 致谢
+
+代码工程大量由 **DeepSeek** 完成——数据结构、本地服务、界面实现，大部分是在与它的对话里推进的。界面语言受 **Claude** 启发：暖米色纸面、衬线标题、等宽元数据，以及尽量少说话的克制。
+
+> AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
 
 ## 许可证
 
