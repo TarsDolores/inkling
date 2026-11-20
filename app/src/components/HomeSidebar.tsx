@@ -15,7 +15,7 @@ export function HomeSidebar({ onOpenTopic }: Props) {
 
   return <aside className="sidebar">
     <div className="brand"><span className="brand-glyph">随</span><span>随记</span></div>
-    <div className={`space-switch${switching ? ' switching' : ''}`} role="group" aria-label="切换空间" style={{ ['--space-count' as string]: String(spaces.length) }}>
+    <div className={`space-switch${switching ? ' switching' : ''}`} role="group" aria-label="切换空间">
       <span className="space-switch-indicator" aria-hidden="true" style={{ left: `calc(3px + (100% - 6px) * ${activeIndex} / ${spaces.length})`, width: `calc((100% - 6px) / ${spaces.length})` }} />
       {spaces.map((item) => (
         <button key={item.id} type="button" className={space === item.id ? 'active' : ''} aria-pressed={space === item.id} disabled={switching} onClick={() => void switchSpace(item.id)}>{item.name}</button>

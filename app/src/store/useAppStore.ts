@@ -83,7 +83,7 @@ function pickValidSpace(space: SpaceId, spaces: SpaceConfig[]): SpaceId {
 function defaultTopicId(space: SpaceId, topics: Topic[]) {
   const spaceDefault = DEFAULT_TOPICS_BY_SPACE[space]
   if (spaceDefault?.length && topics.some((topic) => topic.id === spaceDefault[0].id)) return spaceDefault[0].id
-  return topics[0]?.id ?? spaceDefault?.[0]?.id ?? 'fleeting'
+  return topics[0]?.id ?? spaceDefault?.[0]?.id ?? 'inbox'
 }
 
 async function readRevision(space: SpaceId) {
