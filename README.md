@@ -1,4 +1,4 @@
-# 随记 · Inkling
+﻿# 随记 · Inkling
 
 > 安静、本地优先的 Windows 写作应用。数据是透明的 JSON，AI 只负责轻轻回看。
 
@@ -7,7 +7,6 @@
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-GLM-c96442?style=flat-square)
 
-这是一个 **AI coding 作品**：产品方向与审美由人决定，全部代码、提示词和这份文档由 AI（GLM）写成——没有一行手敲的业务代码。
 
 ![首页](docs/screenshots/home-light.png)
 
@@ -17,6 +16,8 @@
 - **AI 回声**：同时读取两个空间，写成一页十几秒的回顾；支持任意 OpenAI 兼容 API
 - **透明存储**：一篇文章一个 JSON 文件，目录即数据，无账号无云端
 - **安静**：本地服务只绑定 `127.0.0.1`，每日自动备份，不自动调用 AI
+
+> AI coding 作品：想法与审美来自人，代码与文档由 AI（GLM）写成。
 
 ![深色](docs/screenshots/home-dark.png)
 
