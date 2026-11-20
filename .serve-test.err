@@ -1,0 +1,101 @@
+D:\desktop\inkling\app\scripts\serve-suiji.ps1 : ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:278 ×Ö·û: 26
++ ... $name in @('endpoint', 'model', 'apiKey', 'temperature', 'maxTokens', ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°endpoint', 'model', 'apiKey', 'temperature', 'maxTokens', 'proxy')) {
+        if (-not $config.Contains($name)) { $config[$name] = $script:aiDefaultConfig[$name] }
+    }
+    $apiKey = Get-SafeString $Payload.apiKey
+    if ($apiKey) { $config['apiKey'] = $apiKey.Trim() }
+    if ($Payload.clearApiKey -eq $true) { $config['apiKey'] = '' }
+    $endpoint = Get-SafeString $Payload.endpoint
+    if ($endpoint) { $config['endpoint'] = $endpoint.Trim() }
+    $model = Get-SafeString $Payload.model
+    if ($model) { $config['model'] = $model.Trim() }
+    $proxy = Get-SafeString $Payload.proxy
+    if ($proxy) { $config['proxy'] = $proxy.Trim() }
+    if ($null -ne $Payload.maxTokens) {
+        $maxTokens = [int](Get-SafeNumber $Payload.maxTokens 32000)
+        if ($maxTokens -lt 300 -or $maxTokens -gt 384000) { throw 'maxTokens¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:301 ×Ö·û: 18
++         $config['temperature'] = $temperature
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°temperature'] = $temperature
+    }
+    Write-JsonAtomic $script:aiConfigPath $config
+    return Get-AiConfigStatus
+}
+function Get-AiRangeInfo([string]$Range) {
+    $now = [DateTimeOffset]::Now
+    switch ($Range) {
+        '7d' { return [PSCustomObject]@{ Key = '7d'; Label = 'æœ€è¿?7¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:312 ×Ö·û: 15
++         '30d' { return [PSCustomObject]@{ Key = '30d'; Label = 'æœ€è¿?3 ...
++               ~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°{¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:313 ×Ö·û: 10
++         '90d' { return [PSCustomObject]@{ Key = '90d'; Label = 'æœ€è¿?9 ...
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°90d' { return [PSCustomObject]@{ Key = '90d'; Label = 'æœ€è¿?90¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:313 ×Ö·û: 10
++         '90d' { return [PSCustomObject]@{ Key = '90d'; Label = 'æœ€è¿?9 ...
++          ~
+¹þÏ£ÎÄ±¾²»ÍêÕû¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:313 ×Ö·û: 104
++ ... ect]@{ Key = '90d'; Label = 'æœ€è¿?90 å¤?; Start = $now.AddDays(-90) } }
++                                                                         ~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°}¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:314 ×Ö·û: 16
++         'year' {
++                ~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°{¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:329 ×Ö·û: 68
++ ... oreach ($candidate in ((Get-SafeString $Note.content) -split "`n")) {
++                                                                   ~~~~~~~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°`n")) {
+        if ($candidate.Trim()) { $line = $candidate.Trim(); break }
+    }
+    if (-not $line) { return 'æ— é¢˜' }
+    if ($line -match '^(?:```|~~~)') { return 'ä»£ç ç‰‡æ®µ' }
+    $line = $line -replace '^#{1,6}\s*', ''
+    if ($line.Length -gt 40) { $line = $line.Substring(0, 39) + 'â€? }
+    return $line
+}
+function Get-AiReviewContext([string]$Range, [string]$Mode, [string]$TopicId) {
+    if (@('7d', '30d', '90d', 'year', 'all') -notcontains $Range) { $Range = '30d' }
+    if (@('excerpt', 'full') -notcontains $Mode) { $Mode = 'excerpt' }
+    $rangeInfo = Get-AiRangeInfo $Range
+    $candidates = [System.Collections.Generic.List[object]]::new()
+    $configuredIds = @((Get-ConfiguredSpaceIds))
+    foreach ($space in $configuredIds) {
+        $snapshot = Get-Snapshot $space
+        $notes = @($snapshot.notes | Where-Object { -not $_.deletedAt })
+        if ($null -ne $rangeInfo.Start) {
+            $cutoff = $rangeInfo.Start.ToUnixTimeMilliseconds()
+            $notes = @($notes | Where-Object { [double]$_.createdAt -ge $cutoff })
+        }
+        $notes = @($notes | Sort-Object { [double]$_.createdAt })
+        $topicMap = @{}
+        foreach ($topic in @($snapshot.topics)) { $topicMap[[string]$topic.id] = [string]$topic.name }
+        foreach ($note in $notes) {
+            $content = Get-SafeString $note.content
+            $title = Get-AiDisplayTitle $note
+            if (-not $content.Trim() -and -not $title) { continue }
+            if ($Mode -eq 'excerpt' -and $content.Length -gt 1200) { $content = $content.Substring(0, 1200) + 'â€? }
+            if ($Mode -eq 'full' -and $content.Length -gt 10000) { $content = $content.Substring(0, 10000) + 'â€? }
+            $date = [DateTimeOffset]::FromUnixTimeMilliseconds([long]$note.createdAt).ToLocalTime().ToString('yyyy-MM-d
+d')
+            $topicName = if ($topicMap.ContainsKey([string]$note.topicId)) { $topicMap[[string]$note.topicId] } else { 
+'æœªåˆ†ç±? }
+            $entry = "[$date¡±¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:329 ×Ö·û: 68
++ ... oreach ($candidate in ((Get-SafeString $Note.content) -split "`n")) {
++                                                                   ~
+¹þÏ£ÎÄ±¾²»ÍêÕû¡£
+ËùÔÚÎ»ÖÃ D:\desktop\inkling\app\scripts\ai-suiji.ps1:436 ×Ö·û: 46
++ ... if ($script:aiJobs.Count -ge 2) { throw 'åŒæ—¶åªèƒ½ç”Ÿæˆä¸¤é¡µå›žå£°ï¼Œè¯·ç¨åŽå†è¯•ã€? }
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~
+±í´ïÊ½»òÓï¾äÖÐ°üº¬ÒâÍâµÄ±ê¼Ç¡°åŒæ—¶åªèƒ½ç”Ÿæˆä¸¤é¡µå›žå£°ï¼Œè¯·ç¨åŽå†è¯•ã€?¡±¡£
+²¢Î´±¨¸æËùÓÐ·ÖÎö´íÎó¡£Çë¸üÕý±¨¸æµÄ´íÎó²¢ÖØÊÔ¡£
+    + CategoryInfo          : ParserError: (:) [serve-suiji.ps1], ParseException
+    + FullyQualifiedErrorId : UnexpectedToken,serve-suiji.ps1
+ 

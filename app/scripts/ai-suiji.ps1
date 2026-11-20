@@ -1,4 +1,4 @@
-$script:aiJobs = @{}
+﻿$script:aiJobs = @{}
 $script:aiConfigRoot = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Suiji'
 $script:aiConfigPath = Join-Path $script:aiConfigRoot 'ai-config.json'
 if ($env:SUIJI_AI_CONFIG) {
