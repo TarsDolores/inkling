@@ -262,7 +262,7 @@ export function AiReviewCard() {
 
         {!loading && !loadError && !latest && (
           <div className="ai-empty">
-            {!config?.configured && <p>在这台电脑粘贴一次 OpenCode Go Key，就能生成。</p>}
+            {!config?.configured && <p>在 设置 → AI 里粘贴一次 API Key，就能生成。</p>}
             <button type="button" className="terminal-button primary" disabled={busy} onClick={config?.configured ? () => void generate() : goToSettings}>{busy ? <LoaderCircle size={13} className="ai-spin" /> : <Sparkles size={13} />}{busy ? '正在读…' : config?.configured ? '生成第一页' : '配置 Key'}</button>
           </div>
         )}

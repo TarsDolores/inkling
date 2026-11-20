@@ -1,4 +1,4 @@
-﻿$script:aiJobs = @{}
+$script:aiJobs = @{}
 $script:aiConfigRoot = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Suiji'
 $script:aiConfigPath = Join-Path $script:aiConfigRoot 'ai-config.json'
 if ($env:SUIJI_AI_CONFIG) {
@@ -83,9 +83,10 @@ try {
         stream = $false
     }
     $json = $payload | ConvertTo-Json -Depth 10 -Compress
-    $headers = @{ 'Content-Type' = 'application/json'; 'Accept' = 'application/json'; 'User-Agent' = 'Suiji/1.2.1' }
+    $headers = @{ 'Content-Type' = 'application/json'; 'Accept' = 'application/json'; 'User-Agent' = 'Suiji/2.2.0' }
     if ($ApiKey) { $headers['Authorization'] = "Bearer $ApiKey" }
-    if ($SessionId) { $headers['x-opencode-session'] = $SessionId }
+    # x-opencode-session 是 OpenCode Go 的专属要求；其他 OpenAI 兼容服务不带这个头
+    if ($SessionId -and $Endpoint -match 'opencode\.ai') { $headers['x-opencode-session'] = $SessionId }
     $parameters = @{
         Method = 'Post'
         Uri = $Endpoint
@@ -226,7 +227,8 @@ function Get-AiConfig {
     $apiKey = (Get-SafeString $raw.apiKey).Trim()
     $keySource = 'config'
     if (-not $apiKey) {
-        $apiKey = [string]$env:OPENCODE_GO_API_KEY
+        $apiKey = [string]$env:SUIJI_AI_API_KEY
+        if (-not $apiKey) { $apiKey = [string]$env:OPENCODE_GO_API_KEY }
         if ($apiKey) { $keySource = 'environment' } else { $keySource = 'missing' }
     }
 

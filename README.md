@@ -87,8 +87,8 @@ npm run e2e       # Playwright 回归（需先启动本地服务）
 ### 配置
 
 1. 打开 **设置 → AI → 本机连接**
-2. 粘贴你的 API Key（默认按 OpenCode Go 预填 Endpoint 和 Model）
-3. 保存到本机
+2. 选择提供商预设（DeepSeek 官方、OpenRouter、Kimi、本地 Ollama、OpenCode Go，或任意自定义 OpenAI 兼容 API），Endpoint 和 Model 会自动填充，可再手动调整
+3. 粘贴你的 API Key，保存到本机
 
 Key 只保存在本机 `LocalAppData`，不写进浏览器，也不会进入同步或备份文件。只有点击「生成」后文字才会发送到你配置的 API；随记不会自动调用 AI。
 
@@ -153,4 +153,4 @@ CHANGELOG.md        版本历史
 
 ## 致谢
 
-建立在 React、Vite、Zustand、Dexie、framer-motion、lucide-react 之上，AI 回声默认通过 OpenCode Go 调用。
+建立在 React、Vite、Zustand、Dexie、framer-motion、lucide-react 之上，AI 回声支持任何 OpenAI 兼容 API。

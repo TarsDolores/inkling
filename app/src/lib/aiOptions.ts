@@ -18,3 +18,13 @@ export const ECHO_SIZES: { id: EchoSize; label: string }[] = [
   { id: 'standard', label: '标准' },
   { id: 'large', label: '大' }
 ]
+
+/** 任何 OpenAI 兼容 API 都可用；预设只负责填充 Endpoint 和 Model 示例 */
+export const AI_PROVIDERS: { id: string; label: string; endpoint: string; model: string }[] = [
+  { id: 'opencode', label: 'OpenCode Go', endpoint: 'https://opencode.ai/inference/go/openai/v1/chat/completions', model: 'deepseek-v4.1-flash' },
+  { id: 'deepseek', label: 'DeepSeek 官方', endpoint: 'https://api.deepseek.com/v1/chat/completions', model: 'deepseek-chat' },
+  { id: 'openrouter', label: 'OpenRouter', endpoint: 'https://openrouter.ai/api/v1/chat/completions', model: 'deepseek/deepseek-chat' },
+  { id: 'moonshot', label: 'Kimi · 月之暗面', endpoint: 'https://api.moonshot.cn/v1/chat/completions', model: 'moonshot-v1-8k' },
+  { id: 'ollama', label: '本地 Ollama', endpoint: 'http://127.0.0.1:11434/v1/chat/completions', model: 'qwen2.5:7b' },
+  { id: 'custom', label: '自定义（OpenAI 兼容）', endpoint: '', model: '' }
+]
