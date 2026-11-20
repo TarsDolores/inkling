@@ -6,6 +6,8 @@ import { DEFAULT_AI_PERSONA } from '../lib/aiPersona'
 
 export interface SyncSnapshot {
   space: SpaceId
+  /** 数据目录的稳定标识；缓存来自别的目录时客户端据此丢弃 */
+  instanceId?: string
   notes: Note[]
   topics: Topic[]
   settings: AppSettings
@@ -253,7 +255,8 @@ export function normalizeSnapshot(value: unknown): SyncSnapshot {
     }
   }
   const space = /^[a-z][a-z0-9-]{0,19}$/.test(asString(raw.space)) ? asString(raw.space) : 'life'
-  return { space, notes: [...notes.values()], topics: [...topics.values()], settings: normalizeSettings(raw.settings) }
+  const instanceId = /^[0-9a-f]{32}$/.test(asString(raw.instanceId)) ? asString(raw.instanceId) : ''
+  return { space, instanceId, notes: [...notes.values()], topics: [...topics.values()], settings: normalizeSettings(raw.settings) }
 }
 
 export function normalizeBackupInfo(value: unknown): BackupInfo | null {
@@ -281,9 +284,9 @@ export async function mergeLocalSnapshot(snapshot: SyncSnapshot, space: SpaceId 
 }
 
 export async function getSyncRevision(space: SpaceId = 'life') {
-  const result = await request<{ revision?: unknown }>(`/api/sync/revision?space=${space}`)
+  const result = await request<{ revision?: unknown; instanceId?: unknown }>(`/api/sync/revision?space=${space}`)
   if (typeof result.revision !== 'string' || !result.revision) throw new Error('同步状态无效')
-  return result.revision
+  return { revision: result.revision, instanceId: typeof result.instanceId === 'string' ? result.instanceId : '' }
 }
 
 export function saveSyncNote(note: Note, space: SpaceId) {

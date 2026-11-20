@@ -64,6 +64,7 @@ const REFRESH_QUIET_MS = 6_000
 const BACKUP_CHECK_INTERVAL = 6 * 60 * 60 * 1000
 const SPACE_KEY = 'suiji-active-space'
 const CACHE_SPACE_KEY = 'suiji-cache-space'
+const CACHE_INSTANCE_KEY = 'suiji-cache-instance'
 
 let lastRevision: string | null = null
 let lastRevisionSpace: SpaceId | null = null
@@ -86,8 +87,25 @@ function defaultTopicId(space: SpaceId, topics: Topic[]) {
   return topics[0]?.id ?? spaceDefault?.[0]?.id ?? 'inbox'
 }
 
+/**
+ * 浏览器缓存是服务端数据的镜像，不是唯一副本。缓存若来自另一个数据目录
+ * （例如同一端口先后服务过两个安装），必须先丢弃，否则会把旧笔记推回去。
+ */
+async function discardForeignCache(instanceId: string) {
+  if (!instanceId) return
+  const known = localStorage.getItem(CACHE_INSTANCE_KEY)
+  if (known === instanceId) return
+  await db.notes.clear()
+  await db.topics.clear()
+  try { localStorage.setItem(CACHE_INSTANCE_KEY, instanceId) } catch { /* The cache marker is an optimisation, not a requirement. */ }
+}
+
 async function readRevision(space: SpaceId) {
-  try { return await getSyncRevision(space) } catch { return null }
+  try { return (await getSyncRevision(space)).revision } catch { return null }
+}
+
+async function readInstanceId(space: SpaceId) {
+  try { return (await getSyncRevision(space)).instanceId } catch { return '' }
 }
 
 function scheduleBackupCheck() {
@@ -180,6 +198,9 @@ export const useAppStore = create<AppState>((set, get) => {
     initialize: async () => {
       try {
         const requested = readActiveSpace()
+        // 先确认数据目录身份，再决定能否信任本地缓存
+        const instanceId = await readInstanceId(requested)
+        if (instanceId) await discardForeignCache(instanceId)
         const cachedSpace = localStorage.getItem(CACHE_SPACE_KEY)
         const [cachedNotes, cachedTopics, cachedSettings] = await Promise.all([db.notes.toArray(), db.topics.toArray(), db.settings.get('app')])
         const knownSettings = { ...DEFAULT_SETTINGS, ...(cachedSettings?.value ?? {}) }

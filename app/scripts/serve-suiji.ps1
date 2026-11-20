@@ -467,7 +467,7 @@ function Get-Snapshot([string]$Space = 'life') {
 
     $settingsRecord = Get-LatestSettingsRecord
     $settingsValue = if ($null -ne $settingsRecord) { $settingsRecord.Value.value } else { $defaultSettings }
-    return [ordered]@{ space = $space; notes = @($notes); topics = @($topics); settings = (ConvertTo-SafeSettings $settingsValue) }
+    return [ordered]@{ space = $space; instanceId = (Get-InstanceId); notes = @($notes); topics = @($topics); settings = (ConvertTo-SafeSettings $settingsValue) }
 }
 
 function Save-Note($Note, [string]$Space = 'life') {
@@ -712,6 +712,22 @@ function Remove-OldBackups {
     }
 }
 
+function Get-InstanceId {
+    # 每个数据目录一个稳定标识：浏览器缓存若来自别的数据目录，客户端据此丢弃缓存
+    if ($script:instanceId) { return $script:instanceId }
+    $path = Join-Path $dataRoot 'instance.json'
+    $id = ''
+    if (Test-Path -LiteralPath $path -PathType Leaf) {
+        try { $id = [string](Get-Content -LiteralPath $path -Raw -Encoding UTF8 | ConvertFrom-Json).id } catch { $id = '' }
+    }
+    if ($id -notmatch '^[0-9a-f]{32}$') {
+        $id = [Guid]::NewGuid().ToString('N')
+        Write-JsonAtomic $path ([ordered]@{ id = $id; createdAt = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() })
+    }
+    $script:instanceId = $id
+    return $id
+}
+
 function Get-CombinedSnapshot {
     $spaces = [ordered]@{}
     foreach ($space in (Get-ConfiguredSpaceIds)) {
@@ -720,7 +736,7 @@ function Get-CombinedSnapshot {
     }
     $firstSpace = (Get-ConfiguredSpaceIds)[0]
     $settings = (Get-Snapshot $firstSpace).settings
-    return [ordered]@{ spaces = $spaces; settings = $settings }
+    return [ordered]@{ instanceId = (Get-InstanceId); spaces = $spaces; settings = $settings }
 }
 
 function New-Backup([string]$Reason = 'manual', [switch]$Force) {
@@ -955,7 +971,7 @@ try {
                     }
                     elseif ($request.Method -eq 'GET' -and $requestPath -eq '/api/sync/revision') {
                         $space = Resolve-SpaceId (Get-QueryValue $request.Target 'space')
-                        $result = [ordered]@{ revision = (Get-SyncRevision $space); space = $space }
+                        $result = [ordered]@{ revision = (Get-SyncRevision $space); space = $space; instanceId = (Get-InstanceId) }
                     }
                     elseif ($request.Method -eq 'GET' -and $requestPath -eq '/api/sync/snapshot') {
                         $space = Resolve-SpaceId (Get-QueryValue $request.Target 'space')

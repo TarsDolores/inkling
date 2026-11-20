@@ -2,7 +2,7 @@
 
 > 安静、本地优先的 Windows 写作应用。数据是透明的 JSON，AI 只负责轻轻回看。
 
-![version](https://img.shields.io/badge/version-2.3.1-c96442?style=flat-square)
+![version](https://img.shields.io/badge/version-2.3.2-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
