@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -37,7 +37,7 @@ export default defineConfig({
         navigateFallback: 'index.html',
         globPatterns: ['**/*.{js,css,html,svg}'],
         additionalManifestEntries: [
-          { url: '/fonts/LXGWWenKaiLite-Medium.ttf', revision: 'lxgw-wenkai-lite-1.522' },
+          { url: '/fonts/LXGWWenKaiLite-Medium.woff2', revision: 'lxgw-wenkai-lite-1.522-subset' },
           { url: '/fonts/OFL-LXGW-WenKai.txt', revision: 'ofl-1.1' },
           { url: '/fonts/montserrat-light.woff2', revision: 'montserrat-light' },
           { url: '/fonts/montserrat-regular.woff2', revision: 'montserrat-regular' },

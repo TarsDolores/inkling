@@ -2,6 +2,10 @@
 
 所有显著改动都会记录在这里。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本遵循语义化版本。
 
+### 2026-11-21 · v2.3.0 · 体积与隔离
+
+- Bug：AI 配置存在全局 `LocalAppData\Suiji`，同一电脑上的自用版与开源版共享同一个 Key。
+- Feature：AI 配置按数据目录哈希隔离，两版各自独立；字体子集化为 woff2（13.4 MB → 1.6 MB），构建产物 15.5 MB → 2.4 MB；截图转 webp（1.2 MB → 260 KB）；可执行文件不再入库。
 ### 2026-11-20 · v2.2.0 · 开放式 AI 提供商
 
 - Feature：AI 连接支持任意 OpenAI 兼容 API，内置提供商预设（DeepSeek/OpenRouter/Kimi/Ollama/OpenCode Go）；会话头仅对 opencode.ai 端点附加。

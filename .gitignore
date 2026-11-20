@@ -15,3 +15,8 @@ app/.vite/
 app/cdd16426-*.json
 .DS_Store
 Thumbs.db
+
+# 可执行文件不入库（用 Release 分发）
+inkling.exe
+随记.exe
+*.exe

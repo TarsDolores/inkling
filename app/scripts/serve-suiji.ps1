@@ -839,6 +839,18 @@ function Restore-Backup([string]$Name) {
     return [ordered]@{ ok = $true; notes = $restoredNotes; topics = $restoredTopics; safetyBackup = $safety.name }
 }
 
+# AI 配置按数据目录隔离：同一台电脑上的多个安装（如自用版与开源版）不共享 Key
+if (-not $env:SUIJI_AI_CONFIG) {
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = $sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($dataRoot.ToLowerInvariant()))
+        $tag = -join ($digest[0..3] | ForEach-Object { $_.ToString('x2') })
+    }
+    finally { $sha.Dispose() }
+    $configDir = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) (Join-Path 'Suiji' $tag)
+    $env:SUIJI_AI_CONFIG = Join-Path $configDir 'ai-config.json'
+}
+
 . (Join-Path $PSScriptRoot 'ai-suiji.ps1')
 
 function ConvertTo-JsonBytes($Value) {

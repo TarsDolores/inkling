@@ -30,7 +30,9 @@ $ErrorActionPreference = 'Stop'
 
 function Save-AiRawResponse([string]$Text) {
     try {
-        $dir = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Suiji'
+        $configured = [string]$env:SUIJI_AI_CONFIG
+        if ($configured) { $dir = Split-Path -Parent $configured }
+        else { $dir = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Suiji' }
         if (-not (Test-Path -LiteralPath $dir -PathType Container)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
         [IO.File]::WriteAllText((Join-Path $dir 'ai-last-response.txt'), $Text, [Text.UTF8Encoding]::new($false))
     }

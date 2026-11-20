@@ -2,13 +2,13 @@
 
 > 安静、本地优先的 Windows 写作应用。数据是透明的 JSON，AI 只负责轻轻回看。
 
-![version](https://img.shields.io/badge/version-2.2.0-c96442?style=flat-square)
+![version](https://img.shields.io/badge/version-2.3.0-c96442?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows-2f2a25?style=flat-square)
 ![react](https://img.shields.io/badge/React-19-2f2a25?style=flat-square)
 ![ai coded](https://img.shields.io/badge/AI--coded-yes-c96442?style=flat-square)
 
 
-![首页](docs/screenshots/home-light.png)
+![首页](docs/screenshots/home-light.webp)
 
 ## 写下来，然后被轻轻读到
 
@@ -19,11 +19,11 @@
 
 > AI coding 作品：想法与审美来自人，代码与文档由 AI 写成。
 
-![深色](docs/screenshots/home-dark.png)
+![深色](docs/screenshots/home-dark.webp)
 
 | | | |
 |---|---|---|
-| ![编辑器](docs/screenshots/editor.png) | ![科研空间](docs/screenshots/research.png) | ![设置](docs/screenshots/settings.png) |
+| ![编辑器](docs/screenshots/editor.webp) | ![科研空间](docs/screenshots/research.webp) | ![设置](docs/screenshots/settings.webp) |
 
 ## 运行
 
