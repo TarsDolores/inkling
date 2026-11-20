@@ -1,0 +1,35 @@
+{
+  "name": "inkling",
+  "private": true,
+  "version": "2.1.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/build-fingerprint.ps1 -Write",
+    "icon": "node scripts/generate-icon.mjs",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "dexie": "^4.0.11",
+    "framer-motion": "^12.6.3",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "fake-indexeddb": "^6.0.0",
+    "jsdom": "^26.0.0",
+    "playwright-core": "^1.63.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0",
+    "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^3.0.8"
+  }
+}

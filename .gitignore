@@ -1,0 +1,17 @@
+# 个人数据与构建产物不入库
+sync-data/spaces/*/deletions/
+sync-data/spaces/*/topic-deletions/
+sync-data/backups/
+sync-data/ai-reviews/
+*.log
+*.tsbuildinfo
+
+# 依赖与构建
+app/node_modules/
+app/dist/
+app/.vite/
+
+# 本机运行残留
+app/cdd16426-*.json
+.DS_Store
+Thumbs.db

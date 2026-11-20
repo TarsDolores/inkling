@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f0e6" />
+    <script>
+      (() => {
+        let theme = 'system'
+        try { theme = localStorage.getItem('quiet-note-theme') || 'system' } catch {}
+        const dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#1b1916' : '#f5f0e6'
+      })()
+    </script>
+    <style>html { background: #f5f0e6; color-scheme: light; } html[data-theme="dark"] { background: #1b1916; color-scheme: dark; }</style>
+    <meta name="description" content="一款本地优先、安静克制的个人写作应用" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <title>随记</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
