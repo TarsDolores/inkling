@@ -1,4 +1,4 @@
-﻿# 随记 · Inkling
+# 随记 · Inkling
 
 > 安静、本地优先的 Windows 写作应用。数据是透明的 JSON，AI 只负责轻轻回看。
 
@@ -54,4 +54,4 @@ npm run test     # 29 项测试
 
 ## 许可证
 
-代码以 [MIT](LICENSE) 开源；字体遵循各自的 [OFL](app/public/fonts/OFL-LXGW-WenKai.txt) 许可。版本历史见 [CHANGELOG](CHANGELOG.md)。
+代码以 [MIT](LICENSE) 开源；字体遵循各自的 [OFL](app/public/fonts/OFL-LXGW-WenKai.txt) 许可。版本历史见 [CHANGELOG](CHANGELOG.md)，参与方式见 [CONTRIBUTING](CONTRIBUTING.md)。

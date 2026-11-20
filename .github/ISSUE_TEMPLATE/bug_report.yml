@@ -1,0 +1,65 @@
+name: Bug 反馈
+description: 有东西坏了或不对
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提交前先试一次：重启随记（双击 `inkling.exe`），看问题是否还在。
+
+  - type: input
+    id: version
+    attributes:
+      label: 随记版本
+      description: Release 页面上的版本号，或 `app/package.json` 里的 version
+      placeholder: v2.3.2
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows 版本
+      placeholder: Windows 11 23H2
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么
+      description: 越具体越好。界面问题可以直接贴截图。
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开…
+        2. 点击…
+        3. 出现…
+    validations:
+      required: false
+
+  - type: dropdown
+    id: data
+    attributes:
+      label: 是否涉及数据丢失或错乱
+      options:
+        - 不涉及
+        - 涉及，文章内容异常
+        - 涉及，文件缺失
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志
+      description: 若存在 `app/startup-error.log` 或 `app/build-last.log`，可以贴在这里
+      render: text
+    validations:
+      required: false

@@ -1,0 +1,25 @@
+name: 功能建议
+description: 想要一个随记现在没有的能力
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 现在哪里不顺手
+      description: 描述使用场景比描述功能更有帮助
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你设想的做法
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 试过或考虑过的替代方案
+    validations:
+      required: false
