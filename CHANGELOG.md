@@ -1,6 +1,10 @@
-# 更新日志
+﻿# 更新日志
 
 所有显著改动都会记录在这里。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本遵循语义化版本。
+
+### 2026-11-20 · v2.2.0 · 开放式 AI 提供商
+
+- Feature：AI 连接支持任意 OpenAI 兼容 API，内置提供商预设（DeepSeek/OpenRouter/Kimi/Ollama/OpenCode Go）；会话头仅对 opencode.ai 端点附加。
 
 ### 2026-11-19 · v2.1.1 · 空间隔离闸门
 
