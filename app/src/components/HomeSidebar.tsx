@@ -29,7 +29,7 @@ export function HomeSidebar({ onOpenTopic }: Props) {
       <button className="add-topic-shortcut" onClick={() => { setView('settings'); window.setTimeout(() => document.getElementById('new-topic-name')?.focus(), 350) }}><span><Plus size={14} />新建主题</span></button>
     </nav>
     <div className="sidebar-footer">
-      <div className="sidebar-sync"><i aria-hidden="true" /><span>本地优先</span><span className="sync-separator">·</span><span className="sync-service">本地存储</span></div>
+      <div className="sidebar-sync"><i aria-hidden="true" /><span>数据保存在本机</span></div>
       <div className="sidebar-footer-actions">
         <button type="button" onClick={() => setTrashOpen(true)} title="回收站"><Archive size={15} /><span>回收站</span></button>
         <button type="button" onClick={() => setView('settings')} title="设置"><Settings size={15} /><span>设置</span></button>
